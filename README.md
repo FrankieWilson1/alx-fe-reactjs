@@ -1,6 +1,3 @@
-
-Thank you for pointing that out! Here’s the corrected markdown with all code blocks properly closed:
-
 # ALX React Fundamentals: Core Concepts & Components
 
 A modular **React application** constructed to **demonstrate mastery of component architecture**. This repository houses projects that explore the fundamental building blocks of modern SPA development, including JSX, props, and state management.
@@ -58,5 +55,6 @@ To run the main React application locally, follow these steps:
    ```
 
 5. Open your browser: Visit http://localhost:5173 to view the application.
+
 
 **Author:** [Frankie Wilson](https://github.com/FrankieWilson1/) 
