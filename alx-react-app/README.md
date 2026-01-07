@@ -1,16 +1,29 @@
-# React + Vite
+# React Fundamentals Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application showcases specific React components built as part of the ALX React Fundamentals curriculum. It focuses on JSX syntax, component composition, and props.
 
-Currently, two official plugins are available:
+## 🧩 Components Implemented
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Welcome Message (Task 1)
+* **File:** `src/components/WelcomeMessage.jsx`
+* **Description:** A simple functional component demonstrating JSX syntax and embedding Javascript expressions.
 
-## React Compiler
+### 2. City Lovers UI (Task 2)
+* **Files:** `Header.jsx`, `MainContent.jsx`, `Footer.jsx`
+* **Description:** Demonstrates **Component Composition** by assembling three distinct components into a single page layout.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 3. User Profile Card (Task 3)
+* **File:** `src/components/UserProfile.jsx`
+* **Description:** A reusable component that accepts `name`, `age`, and `bio` as **props** to display dynamic user data.
 
-## Expanding the ESLint configuration
+## 🚀 How to Run
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start Development Server:**
+    ```bash
+    npm run dev
+    ```
