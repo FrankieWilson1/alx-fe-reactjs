@@ -9,13 +9,14 @@ import UserDetails from './components/UserDetails'
 import ProfilePage from './components/ProfilePage'
 
 function App() {
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com", age: 25, bio: "Hello world" };
 
   return (
     <UserContext.Provider value={userData}>
       <div style={{ border: '2px solid black', margin: '10px'}}>
         <h3>Now in app.js </h3>
         <ProfilePage />
+        <UserProfile />
       </div>
       
     </UserContext.Provider>
