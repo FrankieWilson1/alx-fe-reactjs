@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 export default function Navbar() {
 
     return (
-        <div>
+        <div style={{
+            display: 'flex',
+            justifyContent: 'center'
+        }}>
             <ul style={{
                 display: 'flex',
                 gap: '20px',
