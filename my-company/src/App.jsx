@@ -1,9 +1,9 @@
 import { createBrowserRouter, Link, RouterProvider, Outlet, Routes } from 'react-router-dom';
 
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-import Services from './Services';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Services from './components/Services';
 import Navbar from './components/Navbar';
 
 
