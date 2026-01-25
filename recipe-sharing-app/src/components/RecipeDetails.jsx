@@ -5,7 +5,7 @@ const RecipeDetails = () => {
     const { id } = useParams();     // Grabs the ID from the URL
 
     const recipe = useRecipeStore(state =>
-        state.recipes.find(r => r.id === Number(id))
+        state.recipes.find(recipe => recipe.id === Number(id))
     );
 
     if (!recipe) return <p>Recipe not found!</p>;
