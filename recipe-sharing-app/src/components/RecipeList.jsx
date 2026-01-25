@@ -4,17 +4,25 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const RecipeList = () => {
     const navigate = useNavigate();
+
+    const filteredRecipes = useRecipeStore(state => state.filteredRecipes);
     const recipes = useRecipeStore(state => state.recipes);
-    console.log("Current recipes in store:", recipes);
+    const searchTerm = useRecipeStore(state => state.searchTerm);
+
+    const displayList = searchTerm ? filteredRecipes : recipes;
+
+    // console.log("Current recipes in store:", recipes);
 
     return (
         <div>
-            {recipes.map(recipe => (
-                <div key={recipe.id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+            <h2>Recipes</h2>
+            {displayList.map(recipe => (
+                <div key={recipe.id}>
                     <h3>
                         <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
                     </h3>
 
+                    {/* buttons ... */}
                     <div className="actions">
                         <button onClick={() => navigate(`/edit/${recipe.id}`)}>
                             Edit Recipe ✏️
@@ -22,8 +30,7 @@ const RecipeList = () => {
 
                         <DeleteRecipeButton recipeId={recipe.id} />
                     </div>
-
-
+                    <p>⏱️ {recipe.cookingTime} mins</p>
                 </div>
             ))}
         </div>
