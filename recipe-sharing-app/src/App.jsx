@@ -4,11 +4,16 @@ import EditRecipeForm from './components/EditRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeList from './components/RecipeList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <Router>
+      <nav>
+        <Link to='/'> Home </Link>
+        <Link to='/favorites'>My Favorites </Link>
+      </nav>
       <Routes>
         <Route path='/' element={
           <>

@@ -2,7 +2,7 @@ import React from 'react'
 import useRecipeStore from './recipeStore';
 
 export default function SearchBar() {
-    const { searchTerm, setSearchTerm, maxTime, setMaxTim } = useRecipeStore();
+    const { searchTerm, setSearchTerm, maxTime, setMaxTime } = useRecipeStore();
 
     return (
         <div className='search-bar'>
@@ -20,7 +20,7 @@ export default function SearchBar() {
                     min='0'
                     max='120'
                     value={maxTime}
-                    onChange={(e) => setMaxTim(Number(e.target.value))}
+                    onChange={(e) => setMaxTime(Number(e.target.value))}
                 />
             </div>
         </div>

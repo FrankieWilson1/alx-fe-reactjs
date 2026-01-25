@@ -2,9 +2,31 @@ import { create } from "zustand";
 
 const useRecipeStore = create((set, get) => ({
     recipes: [],
+    favorites: [],
     searchTerm: '',
-    maxTime: 999,
+    maxTime: 99,
     filteredRecipes:[],
+    recommendations: [],
+
+    addFavorite: (recipeId) => {
+        set(state => ({ favorites: [...state.favorites, recipeId] }));
+        get().generateRecommendations();
+    },
+
+    removeFavorite: (recipeId) => {
+        set(state => ({
+            favorites: state.favorites.filter(id => id !== recipeId)
+        }));
+        get().generateRecommendations();
+    },
+    
+    generateRecommendations: () => set(state => {
+        // Mock implementation based on favorites
+        const recommended = state.recipes.filter(recipe =>
+            !state.favorites.includes(recipe.id) && Math.random() > 0.5
+        );
+        return { recommendations: recommended};
+    }),
 
     // Handles filtering logic
     filterRecipes: () => {
@@ -19,7 +41,7 @@ const useRecipeStore = create((set, get) => ({
 
     setSearchTerm: (term) => {
         set({ searchTerm: term });
-        get().filteredRecipes();    // Re-filter whenever term changes
+        get().filterRecipes();    // Re-filter whenever term changes
     },
 
     setMaxTime: (time) => {
