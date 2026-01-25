@@ -14,22 +14,20 @@ const AddRecipeForm = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Tittle"
-                />
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Description"
-                />
-                <button type="submit">Add Reciep</button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Tittle"
+            />
+            <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+            />
+            <button type="submit">Add Reciep</button>
+        </form>
     );
 };
 
