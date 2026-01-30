@@ -1,4 +1,5 @@
 import React from "react";
+import Search from "./components/Search";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <p className="mt-4 text-gray-700">
         Ready to find some developers?
       </p>
+      <Search />
     </div>
   )
 }
