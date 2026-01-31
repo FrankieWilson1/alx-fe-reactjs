@@ -1,52 +1,55 @@
-import React, { useState } from "react";
-import { fetchUserData } from "../services/githubService";
+import React, { useState } from 'react';
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
-    const [search, setSearch] = useState('');
-    const [userData, setUserData] = useState([]);
+    const [username, setUsername] = useState('');
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setError(false);
+        setUser(null);
 
         try {
-            const data = await fetchUserData(search);
-            setUserData(data.items);
-        } catch (error) {
-            console.error("Search failed");
+            const data = await fetchUserData(username);
+            setUser(data);
+        } catch (err) {
+            setError(true);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="p-4">
-            <form onSubmit={handleSubmit} className="flex gap-2">
+        <div className="search-container p-4">
+            <form onSubmit={handleFormSubmit}>
                 <input
                     type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Enter username..."
+                    className="border p-2"
+                    placeholder="Search GitHub User"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                    Search
-                </button>
+                <button className="bg-blue-500 text-white p-2 ml-2" type='submit'>Search</button>
             </form>
 
-            {loading && <p>Loading...</p>}
+            {loading && <p>Loading....</p>}
 
-            <div className="mt-4">
-                {userData.map(user => (
-                    <div className="border-b py-2">
-                        <img src={user.avatar_url} alt={user.login} className="w-10 rounded-full inline mr-2" />
-                        <a href={user.html_url} target="_blank" rel="noreferrer">{user.login}</a>
+            {error && <p>Looks like we cant find the user</p>}
+
+            {
+                user && (
+                    <div className="user-info mt-4">
+                        <img src={user.avatar_url} alt={user.login} width='100' />
+                        <h2>{user.name || user.login}</h2>
+                        <p>{user.bio}</p>
+                        <a href={user.html_url} target='_blank' rel='noreferrer'>View GitHub Profile</a>
                     </div>
-                ))}
-            </div>
+                )
+            }
         </div>
     );
 };
