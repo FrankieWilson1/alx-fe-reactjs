@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchUserData } from '../services/githubService';
+import { Link } from 'react-router-dom';
 
 const Search = () => {
     const [username, setUsername] = useState('');
@@ -8,26 +9,40 @@ const Search = () => {
     const [userData, setUserData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalCount, setTotalCount] = useState(0);
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(false);
-        setUserData([]);
-
-        try {
-            const items = await fetchUserData(username, location, minRepos);
-            setUserData(items);
-        } catch (err) {
-            setError(true);
-        } finally {
-            setLoading(false);
-        }
+    const loadMore = () => {
+        setPage(prev => prev + 1);
     };
+
+    useEffect(() => {
+        if (!username.trim()) {
+            setUserData([]);
+            return;
+        }
+
+        // A timer that waits 500ms
+        const delayDebounce = setTimeout(async () => {
+            setLoading(true);
+            try {
+                const items = await fetchUserData(username, location, minRepos, page);
+                setUserData(prev => (page === 1 ? items : [...prev, ...items]));
+                setTotalCount(items.totalCount);
+            } catch (error) {
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        }, 500);
+
+        // Clears the timer if the user types another letter before 500ms are up
+        return () => clearTimeout(delayDebounce);
+    }, [username, location, minRepos, page]);
 
     return (
         <div className="search-container p-4">
-            <form onSubmit={handleFormSubmit} className='bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto'>
+            <form className='bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto'>
                 <div className="flex flex-col md:flex-row gap-4">
                     <input
                         type="text"
@@ -66,7 +81,12 @@ const Search = () => {
                         <div className="ml-4 flex-1">
                             <h3 className="text-lg font-bold">{user.login}</h3>
                             <p className="text-sm text-gray-600">Type: {user.type}</p>
-                            <a href={user.html_url} target='_blank' rel='noreferrer' className="text-blue-500 hover:underline"></a>
+                            <a href={user.html_url} target='_blank' rel='noreferrer' className="text-blue-500 hover:underline">GitHub</a>
+                            <Link
+                                to={`/user/${user.login}`}
+                                className='text-blue-500 hover:text-blue-700 font-medium'
+                            > View Full Profile
+                            </Link>
                         </div>
 
                     </div>
