@@ -1,9 +1,11 @@
+import HomePage from './components/HomePage';
+
 function App() {
   return (
-    <>
-     <h1>hello</h1>
-    </>
-  )
+    <main>
+      <HomePage />
+    </main>
+  );
 }
 
-export default App
+export default App;
