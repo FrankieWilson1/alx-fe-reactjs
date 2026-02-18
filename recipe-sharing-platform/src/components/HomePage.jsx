@@ -1,60 +1,68 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import recipeData from '../data.json';
-// md
+import recipeData from '../data.json'; 
 
 const HomePage = () => {
-    const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-        // Simulating an API call or data load
-        setRecipes(recipeData);
-    }, []);
+  useEffect(() => {
+    setRecipes(recipeData);
+  }, []);
 
-    return (
-        <div className="min-h-screen bg-gray-50 p-8">
-            <header className="mb-12 text-center">
-                <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
-                    Delicious Recipes
-                </h1>
-                <p className="mt-2 text-lg text-gray-600">Discover your next favorite meal</p>
-            </header>
-
-            {/* Grid Layout */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {recipes.map((recipe) => (
-                    <div
-                        key={recipe.id}
-                        className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100"
-                    >
-                        {/* Card Image */}
-                        <div className="aspect-video overflow-hidden">
-                            <img
-                                src={recipe.image}
-                                alt={recipe.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                        </div>
-
-                        {/* Card Content */}
-                        <div className="p-6">
-                            <h2 className="text-xl font-bold text-gray-800 mb-2">
-                                {recipe.title}
-                            </h2>
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                                {recipe.summary}
-                            </p>
-                            <Link
-                                to={`/recipe/${recipe.id}`}
-                                className="mt-4 w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
-                                View Recipe
-                            </Link>
-                        </div>
-                    </div>
-                ))}
-            </div>
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation Bar */}
+      <nav className="bg-white shadow-md p-4 sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold text-blue-600">RecipeShare</Link>
+          <Link 
+            to="/add-recipe" 
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+          >
+            + Add Recipe
+          </Link>
         </div>
-    );
+      </nav>
+
+      <div className="p-8">
+        <header className="mb-12 text-center">
+          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+            Delicious Recipes
+          </h1>
+          <p className="mt-2 text-lg text-gray-600">Discover your next favorite meal</p>
+        </header>
+
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {recipes.map((recipe) => (
+            <div 
+              key={recipe.id} 
+              className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100"
+            >
+              <div className="aspect-video overflow-hidden">
+                <img 
+                  src={recipe.image} 
+                  alt={recipe.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-gray-800 mb-2">{recipe.title}</h2>
+                <p className="text-gray-600 text-sm leading-relaxed">{recipe.summary}</p>
+                <Link 
+                  to={`/recipe/${recipe.id}`} 
+                  className="mt-4 block text-center py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                >
+                  View Recipe
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default HomePage;
